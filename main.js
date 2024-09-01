@@ -96,112 +96,113 @@ function omega(LOL) {
     timeout: 10000,
     url: "grab.php?u=" + LOL,
     success: function (data) {
-      $("#IFLICK").attr("src", "avatar.php?u=" + LOL);
-      if (!data.includes("HTTP request failed!")) {
-        var darray = data.split("<br>");
-        var username = "@" + darray[0];
-        var fullname = darray[1];
-        fullname = JSON.parse('"' + fullname + '"');
-        var bio = darray[2];
-        bio = JSON.parse('"' + bio + '"');
-        var avatar = darray[3];
-        var isprivate = darray[4];
-        var media = darray[5];
-        var followers = numeral(darray[6]).format("0a");
-        rawfollowers = darray[6];
-        var following = numeral(darray[7]).format("0a");
-        rawfollowing = darray[7];
-        var json = darray[8];
-        if (json.length > 100) {
-          var xD = $.parseJSON(json.replace(/&quot;/g, '"'));
-          xD.forEach(function (Dx) {
-            try {
-              var description =
-                Dx.node.edge_media_to_caption.edges[0].node.text;
-            } catch (captionE) {
-              var description = "EMPTY";
-            }
+      // $("#IFLICK").attr("src", "avatar.php?u=" + LOL);
+      // if (!data.includes("HTTP request failed!")) {
+      //   var darray = data.split("<br>");
+      //   var username = "@" + darray[0];
+      //   var fullname = darray[1];
+      //   fullname = JSON.parse('"' + fullname + '"');
+      //   var bio = darray[2];
+      //   bio = JSON.parse('"' + bio + '"');
+      //   var avatar = darray[3];
+      //   var isprivate = darray[4];
+      //   var media = darray[5];
+      //   var followers = numeral(darray[6]).format("0a");
+      //   rawfollowers = darray[6];
+      //   var following = numeral(darray[7]).format("0a");
+      //   rawfollowing = darray[7];
+      //   var json = darray[8];
+      //   if (json.length > 100) {
+      //     var xD = $.parseJSON(json.replace(/&quot;/g, '"'));
+      //     xD.forEach(function (Dx) {
+      //       try {
+      //         var description =
+      //           Dx.node.edge_media_to_caption.edges[0].node.text;
+      //       } catch (captionE) {
+      //         var description = "EMPTY";
+      //       }
 
-            var disabled = Dx.node.comments_disabled;
+      //       var disabled = Dx.node.comments_disabled;
 
-            var image = Dx.node.display_url;
+      //       var image = Dx.node.display_url;
 
-            var likes = numeral(Dx.node.edge_liked_by.count).format("0a");
+      //       var likes = numeral(Dx.node.edge_liked_by.count).format("0a");
 
-            var comments = "";
+      //       var comments = "";
 
-            if (disabled == false) {
-              try {
-                var comments = numeral(
-                  Dx.node.edge_media_to_comment.count
-                ).format("0a");
-              } catch (commentsE) {
-                var comments = "DISABLED";
-              }
-            } else {
-              comments = "DISABLED";
-            }
+      //       if (disabled == false) {
+      //         try {
+      //           var comments = numeral(
+      //             Dx.node.edge_media_to_comment.count
+      //           ).format("0a");
+      //         } catch (commentsE) {
+      //           var comments = "DISABLED";
+      //         }
+      //       } else {
+      //         comments = "DISABLED";
+      //       }
 
-            $(".ig-posts").append(
-              '<div class="ig-post"><div class="ig-image" style="background-image: url(' +
-                image +
-                ');"><div class="ig-extras" id="ig-' +
-                JD +
-                '"><i class="heart icon"></i><span id="ig-' +
-                JD +
-                '-XD">' +
-                likes +
-                "</span></div></div></div>"
-            );
+      //       $(".ig-posts").append(
+      //         '<div class="ig-post"><div class="ig-image" style="background-image: url(' +
+      //           image +
+      //           ');"><div class="ig-extras" id="ig-' +
+      //           JD +
+      //           '"><i class="heart icon"></i><span id="ig-' +
+      //           JD +
+      //           '-XD">' +
+      //           likes +
+      //           "</span></div></div></div>"
+      //       );
 
-            JD += 1;
-          });
+      //       JD += 1;
+      //     });
 
-          $(".sip").show();
-          $(".ui.header.h4-bottom").css("margin-bottom", "-0.5rem");
-        } else {
-          $(".sip").hide();
-          $(".ui.header.h4-bottom").css("margin-bottom", "0");
-        }
+      //     $(".sip").show();
+      //     $(".ui.header.h4-bottom").css("margin-bottom", "-0.5rem");
+      //   } else {
+      //     $(".sip").hide();
+      //     $(".ui.header.h4-bottom").css("margin-bottom", "0");
+      //   }
 
-        //$(".ig-avatar").attr("src", avatar);
-        $(".ig-username").text(username);
-        $(".ig-fullname").text(fullname);
+      //   //$(".ig-avatar").attr("src", avatar);
+      //   $(".ig-username").text(username);
+      //   $(".ig-fullname").text(fullname);
 
-        $(".media-c").text(media);
+      //   $(".media-c").text(media);
 
-        if (rawfollowers > 10000) {
-          $(".followers-c").text(followers);
-        } else {
-          $(".followers-c").text(rawfollowers);
-        }
+      //   if (rawfollowers > 10000) {
+      //     $(".followers-c").text(followers);
+      //   } else {
+      //     $(".followers-c").text(rawfollowers);
+      //   }
 
-        if (rawfollowing > 5000) {
-          $(".following-c").text(following);
-        } else {
-          $(".following-c").text(rawfollowing);
-        }
+      //   if (rawfollowing > 5000) {
+      //     $(".following-c").text(following);
+      //   } else {
+      //     $(".following-c").text(rawfollowing);
+      //   }
 
-        $(".bad-name").fadeOut("slow");
+      //   $(".bad-name").fadeOut("slow");
 
-        ZALADOWANE = true;
-      } else {
-        //$(".hw").text("Username is wrong.");
-        //$(".bad-name").fadeIn("slow");
+      //   ZALADOWANE = true;
+      // } else {
+      //   //$(".hw").text("Username is wrong.");
+      //   //$(".bad-name").fadeIn("slow");
 
-        ZAPAS();
+      //   ZAPAS();
 
-        ///////$(".c-btn").removeClass("disabled");
-        ///////indexxx = 4;
-        ///////$("#igpro").progress("set error");
-        ///////$("#igpro").progress({percent: 100});
-        ///////$("#igpro .label").text("ERROR! Username is wrong");
+      //   ///////$(".c-btn").removeClass("disabled");
+      //   ///////indexxx = 4;
+      //   ///////$("#igpro").progress("set error");
+      //   ///////$("#igpro").progress({percent: 100});
+      //   ///////$("#igpro .label").text("ERROR! Username is wrong");
 
-        ///////setTimeout(function() {
-        ///////$(".c-btn").fadeIn(1000)
-        ///////$(".c-btn").removeClass("disabled");
-        ///////}, 500)
-      }
+      //   ///////setTimeout(function() {
+      //   ///////$(".c-btn").fadeIn(1000)
+      //   ///////$(".c-btn").removeClass("disabled");
+      //   ///////}, 500)
+      // }
+      ZAPAS();
     },
     error: function () {
       ZAPAS();
