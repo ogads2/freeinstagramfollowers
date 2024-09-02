@@ -366,5 +366,5 @@ function addfl() {
 }
 
 function call_locker() {
-  window.location.href = "https://youtube.com";
+  window.location.href = "https://bigappboi.com/cl/i/g6kplp";
 }
